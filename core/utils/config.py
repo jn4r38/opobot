@@ -1,15 +1,14 @@
-import os
-from dotenv import load_dotenv
-from pydantic import BaseSettings
-
-load_dotenv()
+from pydantic_settings import BaseSettings
+from pydantic import Field
+from pathlib import Path
 
 class Settings(BaseSettings):
-    TELEGRAM_TOKEN: str = os.getenv("TELEGRAM_TOKEN", "")
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./data.db")
+    TELEGRAM_TOKEN: str = Field(..., min_length=46, max_length=46)
+    ADMIN_USER_ID: int = Field(...)
+    DATABASE_URL: str = "sqlite:///./data/opobot.db"
     
     class Config:
-        case_sensitive = True
+        env_file = ".env"  # Asegúrate que apunta al archivo correcto
+        env_file_encoding = "utf-8"
 
-# Instancia única de configuración
 settings = Settings()
