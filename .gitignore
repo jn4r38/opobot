@@ -1,0 +1,38 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Archivos de entorno y sensibles
+.env
+*.env.local
+.secrets
+
+# Database y caché
+*.db
+*.sqlite
+*.db-journal
+/data/preguntas/*  # Ignora contenido, pero conserva la carpeta
+!data/preguntas/.gitkeep  # Excepto este archivo
+
+# Python
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/
+
+# Logs y outputs
+*.log
+logs/
+outputs/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+

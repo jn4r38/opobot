@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Estadísticas Premium</h1>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Reportes Activos</h3>
+        <p>{{ reports_count }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Usuarios Premium</h3>
+        <p>{{ users_count }}</p>
+    </div>
+</div>
+
+<canvas id="statsChart" width="400" height="200"></canvas>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Gráfico con Chart.js
+    const ctx = document.getElementById('statsChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {{ chart_data|tojson|safe }}
+    });
+</script>
+{% endblock %}

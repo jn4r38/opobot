@@ -1,0 +1,57 @@
+/* Variables de diseño */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #166088;
+    --error-color: #d33f49;
+}
+
+/* Estilos base */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background: var(--primary-color);
+    padding: 1rem;
+}
+
+.navbar a {
+    color: white;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.container {
+    padding: 2rem;
+}
+
+/* Componentes */
+.stat-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-resolved {
+    color: green;
+}

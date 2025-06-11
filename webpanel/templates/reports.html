@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block content %}
+<h1>Reportes de Preguntas</h1>
+
+<table class="report-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pregunta</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+        <tr>
+            <td>{{ report.id }}</td>
+            <td>{{ report.question_text|truncate(50) }}</td>
+            <td class="status-{{ report.status }}">
+                {{ report.status|capitalize }}
+            </td>
+            <td>
+                <a href="/admin/reports/{{ report.id }}" class="btn">Revisar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {% if page > 1 %}
+    <a href="?page={{ page-1 }}">Anterior</a>
+    {% endif %}
+    <span>Página {{ page }}</span>
+    {% if has_next %}
+    <a href="?page={{ page+1 }}">Siguiente</a>
+    {% endif %}
+</div>
+{% endblock %}
