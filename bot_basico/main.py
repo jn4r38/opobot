@@ -1,35 +1,31 @@
 import logging
-from telegram.ext import Application, CommandHandler
-from core.utils.config import settings
-from .handlers import reports, questions
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
+from core.utils.config import Config
 
-# Configuración básica de logging
+# Configura logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
+logger = logging.getLogger(__name__)
 
-async def post_init(application: Application) -> None:
-    """Tareas después de inicializar el bot"""
-    await application.bot.set_my_commands([
-        ("start", "Inicia el bot"),
-        ("test", "Realiza un test"),
-        ("report", "Reporta un problema")
-    ])
+def start(update: Update, context: CallbackContext) -> None:
+    """Manejador del comando /start"""
+    update.message.reply_text('¡Bot de oposiciones activado! Usa /test para empezar.')
 
 def main() -> None:
-    """Punto de entrada del bot básico"""
-    application = Application.builder() \
-        .token(settings.TELEGRAM_BOT_TOKEN) \
-        .post_init(post_init) \
-        .build()
+    """Inicia el bot"""
+    updater = Updater(Config.TELEGRAM_TOKEN)
+    dispatcher = updater.dispatcher
 
-    # Registra los handlers
-    reports.setup(application)
-    questions.setup(application)
+    # Registra los comandos
+    dispatcher.add_handler(CommandHandler("start", start))
 
     # Inicia el bot
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    updater.start_polling()
+    logger.info("Bot escuchando...")
+    updater.idle()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

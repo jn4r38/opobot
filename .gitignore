@@ -36,3 +36,7 @@ outputs/
 .DS_Store
 Thumbs.db
 
+.vscode/
+*.log
+.DS_Store
+*.sqlite3
